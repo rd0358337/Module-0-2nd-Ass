@@ -10,7 +10,7 @@ public class CreateFile {
     String file = "highScores.csv";
     BufferedReader reader = null;
     String line = "";
-
+    //Players Array List
     List<Players> players = new ArrayList<>();
 
 
@@ -19,9 +19,9 @@ public class CreateFile {
       while((line = reader.readLine()) != null) {
         
         String[] row = line.split(",");
-
+        //adds new player to the list
         players.add(new Players(row[1], Integer.parseInt(row[2])));
-
+        //output and formatting for original high scores
         for(String index : row) {
           System.out.printf("%-10s", index);
         }
@@ -41,10 +41,10 @@ public class CreateFile {
         }
       }
       }
-
+      //Adding new player to updated high scores list
       Players newPlayer = new Players("RJD",7688902);
       players.add(newPlayer);
-
+      //Sorts players in descending order based on high score
       for (int i = 0; i < players.size() - 1; i++) {
         for (int j = i + 1; j < players.size(); j++) {
           if (players.get(i).getScore() < players.get(j).getScore()) {
@@ -57,9 +57,13 @@ public class CreateFile {
       //Drops lowest score
       players.remove(players.size() - 1);
 
+      //outputs updated high scores
       System.out.println("\nNew High Scores: ");
+      int rank = 1;
       for (Players player : players) {
-        System.out.printf("\n%-10s %-10s", player.getInitials(), player.getScore());
+        //formatting for new scores data
+        System.out.printf("\n#%-10d %-10s %-10d", rank, player.getInitials(), player.getScore());
+        rank++;
       }
 
 
